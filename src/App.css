@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+/* Custom styles that enhance Bootstrap */
+
+/* Custom variables */
+:root {
+  --bs-primary: #f06;
+  --bs-primary-rgb: 255, 0, 102;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Custom map styling */
+.map-container {
+  height: 100%;
+  border-radius: 0.375rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Custom animation for drag items */
+.dragging-item {
+  transform: rotate(1deg) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Bootstrap overrides */
+.btn-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
 }
 
-.App-link {
-  color: #61dafb;
+.text-primary {
+  color: var(--bs-primary) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.border-primary {
+  border-color: var(--bs-primary) !important;
+}
+
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+.drag-icon{
+    width: 20px;
+    height: 20px;
 }

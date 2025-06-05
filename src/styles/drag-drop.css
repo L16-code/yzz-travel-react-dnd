@@ -1,0 +1,152 @@
+/* Drag and Drop Styles */
+
+/* Ensure the component being dragged has proper visibility and positioning */
+.activity-card.dragging {
+  cursor: grabbing !important;
+  /* Removed rotation to prevent positioning issues */
+  transform-origin: center center;
+  will-change: transform, opacity;
+  /* Force the dragged item to remain visible */
+  z-index: 9999 !important;
+}
+
+/* Fix for positioning and visibility issues during dragging */
+.react-beautiful-dnd-draggable {
+  transform-origin: center center !important;
+  transition: none !important; /* Remove transition to prevent lag */
+  pointer-events: auto !important;
+}
+
+/* Override react-beautiful-dnd default styles that might cause positioning issues */
+[data-rbd-draggable-id] {
+  position: relative;
+}
+
+/* Improved appearance during drag */
+div[data-rbd-draggable-id] {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+/* Ensure draggable items are always visible no matter the direction of drag */
+.draggable-item {
+  user-select: none;
+}
+
+/* Improve performance with hardware acceleration */
+.activity-card {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease;
+  /* Remove transition on transform to prevent stuck animations */
+}
+
+/* Style specifically targeting the dragging clone element */
+.activity-card[style*="position: fixed"] {
+  /* This targets the clone element created by react-beautiful-dnd */
+  opacity: 0.85 !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+  /* Force it to stay on top and be visible */
+  z-index: 9999 !important;
+}
+
+/* Fix for the item being stuck during drag */
+body.is-dragging .activity-card {
+  transition: none !important;
+}
+
+/* Specific fix for top-to-bottom dragging issues */
+.react-beautiful-dnd-drag-placeholder {
+  visibility: hidden;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+/* Critical: Force react-beautiful-dnd to maintain proper cursor tracking */
+[data-rbd-draggable-id] {
+  position: relative !important;
+}
+
+/* When actively being dragged, let react-beautiful-dnd control the positioning entirely */
+[data-rbd-dragging="true"] {
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  /* Do not override transform - that's what controls the position */
+}
+
+/* Don't modify the fixed positioning during drag */
+.activity-card[style*="position: fixed"] {
+  /* Don't override transforms or positioning at all */
+  transition: none !important;
+}
+
+/* Additional fix for dragging motion */
+[data-rbd-draggable-context-id] {
+  user-select: none !important;
+  outline: none !important;
+}
+
+/* Ensure drag item stays visible when moving up or down */
+[data-rbd-drag-handle-context-id] {
+  touch-action: none;
+}
+
+/* Add a smooth transition when dragging ends */
+.transition {
+  transition: all 0.2s ease !important;
+}
+
+/* Fix for the "drop" animation */
+.react-beautiful-dnd-placeholder {
+  transition: all 0.15s ease !important;
+  min-height: 100px !important;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  /* Ensure touch events work properly on mobile */
+  [data-rbd-draggable-id] {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Make draggable items more touch-friendly */
+  .activity-card {
+    cursor: grab;
+    transition: transform 0.15s ease-in-out;
+  }
+  
+  /* Handle iOS Safari specific issues */
+  .activity-card.dragging {
+    /* Prevent text selection during drag */
+    -webkit-touch-callout: none;
+    /* Prevent scroll interference */
+    touch-action: none;
+    /* Ensure drag visual is clean */
+    background-color: white;
+    opacity: 0.9 !important;
+  }
+  
+  /* Ensure the dropdown menu appears above draggable elements */
+  .position-absolute {
+    z-index: 9999;
+  }
+  
+  /* Line clamp for mobile */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Line clamp for desktop */
+  @media (min-width: 768px) {
+    .line-clamp-md-3 {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
+  }
+}
